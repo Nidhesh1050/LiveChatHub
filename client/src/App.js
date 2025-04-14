@@ -4,8 +4,8 @@ import { useState } from "react";
 import Chat from "./Chat";
 
 //const socket = io.connect("http://localhost:3001");
-
-const socket = io.connect("http://192.168.29.62:3001");
+const socket = io.connect("https://livechathub-4.onrender.com");
+//const socket = io.connect("http://192.168.29.62:3001");
  
 function App() {
   const [username, setUsername] = useState("");
