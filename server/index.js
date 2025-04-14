@@ -3,26 +3,33 @@ const app = express();
 const http = require("http");
 const cors = require("cors");
 const { Server } = require("socket.io");
-app.use(cors());
+
+// ✅ Express middleware CORS config
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "https://phenomenal-pegasus-e43487.netlify.app"
+  ],
+  methods: ["GET", "POST"],
+  credentials: true
+}));
 
 const server = http.createServer(app);
 
+// ✅ Socket.IO CORS config
 const io = new Server(server, {
   cors: {
     origin: [
-      // "http://localhost:3000",
-      // "http://192.0.0.106:3000",
-      // "http://192.168.29.62:3000",
-       "https://phenomenal-pegasus-e43487.netlify.app/"
+      "http://localhost:3000",
+      "https://phenomenal-pegasus-e43487.netlify.app"
     ],
     methods: ["GET", "POST"],
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"], // Add headers as needed
-  },
+    allowedHeaders: ["Content-Type", "Authorization"]
+  }
 });
 
-
-
+// ✅ Socket logic
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
@@ -40,6 +47,7 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3001, () => {
-  console.log("SERVER RUNNING");
+// ✅ Run on PORT from env or default 3001
+server.listen(process.env.PORT || 3001, () => {
+  console.log("SERVER RUNNING on port", process.env.PORT || 3001);
 });
