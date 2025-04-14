@@ -21,7 +21,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       "http://localhost:3000",
-      "https://phenomenal-pegasus-e43487.netlify.app"
+      "https://kaleidoscopic-kulfi-1ddca9.netlify.app/"
     ],
     methods: ["GET", "POST"],
     credentials: true,
